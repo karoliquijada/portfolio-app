@@ -1,3 +1,7 @@
+"use client"
+
+import { useLanguage } from "@/components/language-provider"
+
 const technologies = [
   { name: "Laravel", category: "Backend" },
   { name: "Vue.js", category: "Frontend" },
@@ -14,17 +18,15 @@ const technologies = [
 ]
 
 export function TechStack() {
+  const { t } = useLanguage()
+
   return (
     <section className="py-20 md:py-32 px-6">
       <div className="mx-auto max-w-6xl">
         <div className="space-y-4 mb-12">
-          <p className="text-primary text-sm font-medium tracking-wide uppercase">Tech Stack</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance">
-            Technologies I work with
-          </h2>
-          <p className="text-muted-foreground max-w-2xl">
-            Focused on the Laravel and Vue ecosystem, with expertise in payment integrations and responsive design.
-          </p>
+          <p className="text-primary text-sm font-medium tracking-wide uppercase">{t.techStack.label}</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance">{t.techStack.heading}</h2>
+          <p className="text-muted-foreground max-w-2xl">{t.techStack.subheading}</p>
         </div>
 
         <div className="flex flex-wrap gap-3">
@@ -40,16 +42,16 @@ export function TechStack() {
 
         <div className="mt-12 grid sm:grid-cols-3 gap-6">
           <div className="p-6 rounded-lg bg-card border border-border">
-            <p className="text-2xl font-bold text-foreground mb-1">Backend</p>
-            <p className="text-sm text-muted-foreground">Laravel, PHP, REST APIs, Database design</p>
+            <p className="text-2xl font-bold text-foreground mb-1">{t.techStack.backend}</p>
+            <p className="text-sm text-muted-foreground">{t.techStack.backendDesc}</p>
           </div>
           <div className="p-6 rounded-lg bg-card border border-border">
-            <p className="text-2xl font-bold text-foreground mb-1">Frontend</p>
-            <p className="text-sm text-muted-foreground">Vue.js, JavaScript, Tailwind CSS, Responsive UI</p>
+            <p className="text-2xl font-bold text-foreground mb-1">{t.techStack.frontend}</p>
+            <p className="text-sm text-muted-foreground">{t.techStack.frontendDesc}</p>
           </div>
           <div className="p-6 rounded-lg bg-card border border-border">
-            <p className="text-2xl font-bold text-foreground mb-1">Integration</p>
-            <p className="text-sm text-muted-foreground">Payment gateways, Third-party APIs, Webhooks</p>
+            <p className="text-2xl font-bold text-foreground mb-1">{t.techStack.integration}</p>
+            <p className="text-sm text-muted-foreground">{t.techStack.integrationDesc}</p>
           </div>
         </div>
       </div>

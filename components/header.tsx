@@ -5,17 +5,10 @@ import { useState } from "react"
 import { Menu, X, Sun, Moon } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-
-const navLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#portfolio", label: "Work" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
-]
+import { useLanguage } from "@/components/language-provider"
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme()
-
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -28,8 +21,29 @@ function ThemeToggle() {
   )
 }
 
+function LanguageToggle() {
+  const { locale, setLocale } = useLanguage()
+  return (
+    <button
+      onClick={() => setLocale(locale === "en" ? "es" : "en")}
+      className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+      aria-label="Toggle language"
+    >
+      {locale === "en" ? "ES" : "EN"}
+    </button>
+  )
+}
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { t } = useLanguage()
+
+  const navLinks = [
+    { href: "#services", label: t.nav.services },
+    { href: "#portfolio", label: t.nav.work },
+    { href: "#about", label: t.nav.about },
+    { href: "#contact", label: t.nav.contact },
+  ]
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -50,13 +64,15 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+            <LanguageToggle />
             <ThemeToggle />
             <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <a href="#contact">Get in touch</a>
+              <a href="#contact">{t.nav.getInTouch}</a>
             </Button>
           </nav>
 
           <div className="md:hidden flex items-center gap-2">
+            <LanguageToggle />
             <ThemeToggle />
             <button
               className="p-2 text-muted-foreground hover:text-foreground transition-colors"
@@ -82,7 +98,7 @@ export function Header() {
                 </Link>
               ))}
               <Button asChild size="sm" className="w-fit bg-primary text-primary-foreground hover:bg-primary/90">
-                <a href="#contact" onClick={() => setIsMenuOpen(false)}>Get in touch</a>
+                <a href="#contact" onClick={() => setIsMenuOpen(false)}>{t.nav.getInTouch}</a>
               </Button>
             </div>
           </nav>
